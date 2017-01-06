@@ -1,0 +1,12 @@
+[Unit]
+Description=Mongodb container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run -v /home/cibot/docker_config/mongodb_container/bdd/:/data/db -p 27017:27017 -p 28017:28017 -e MONGODB_USER="sailadmin" -e MONGODB_DATABASE="sailadmin" -e MONGODB_PASS="Sail2017" mongodb_sail
+ExecStop=/usr/bin/docker stop -t 2 mongodb_sail
+
+[Install]
+WantedBy=default.target
