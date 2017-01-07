@@ -1,0 +1,72 @@
+docker network create sail-mongo-cluster
+docker run -p 30001:27017 --name mongo1 --net sail-mongo-cluster mongo --auth --replSet sail-mongo-set
+docker run -p 30002:27017 --name mongo2 --net sail-mongo-cluster mongo --auth --replSet sail-mongo-set
+docker exec -it mongo1 mongo
+db = (new Mongo('localhost:27017')).getDB('saildb')
+config = {
+	"_id" : "sail-mongo-set",
+  "version" : 1,
+  "members" : [
+		{
+			"_id" : 0,
+			"host" : "mongo1:27017"
+		},
+		{
+			"_id" : 1,
+			"host" : "mongo2:27017"
+		}
+	]
+}
+rs.initiate(config)
+
+deuxieme version
+mkdir main
+openssl rand -base64 741 > main/mongodb-keyfile
+chmod 600 main/mongodb-keyfile
+sudo chown 999 main/mongodb-keyfile
+#The file owner was changed to a user id of “999" because the user in the MongoDB Docker container is the one that needs to access this key file.
+docker run --name mongo1 -v /home/cibot/docker_config/swarm_mongodb_container/main/mongo-files/data:/data/db -v /home/cibot/docker_config/swarm_mongodb_container/main:/opt/keyfile --net sail-mongo-cluster -p 30001:27017 -d mongo
+docker exec -it mongo1 /bin/bash
+mongo
+use admin
+db.createUser( {
+     user: "sailadmin",
+     pwd: "Sail2017",
+     roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+   });
+ db.createUser( {
+      user: "sailroot",
+      pwd: "Sail2017",
+      roles: [ { role: "root", db: "admin" } ]
+    });
+exit
+exit
+docker stop mongo1
+docker rm mongo1
+mkdir second
+sudo cp main/mongodb-keyfile second/mongodb-keyfile
+sudo chmod 600 second/mongodb-keyfile
+sudo chown 999 second/mongodb-keyfile
+docker run --name mongo1 -v /home/cibot/docker_config/swarm_mongodb_container/main/mongo-files/data:/data/db -v /home/cibot/docker_config/swarm_mongodb_container/main:/opt/keyfile --net sail-mongo-cluster -p 30001:27017 -d mongo --keyFile /opt/keyfile/mongodb-keyfile --replSet sail-mongo-set
+docker run --name mongo2 -v /home/cibot/docker_config/swarm_mongodb_container/second/mongo-files/data:/data/db -v /home/cibot/docker_config/swarm_mongodb_container/second:/opt/keyfile --net sail-mongo-cluster -p 30002:27017 -d mongo --keyFile /opt/keyfile/mongodb-keyfile --replSet sail-mongo-set
+docker exec -it mongo1 /bin/bash
+mongo
+use admin
+db.auth("sailroot", "Sail2017");
+config = {
+	"_id" : "sail-mongo-set",
+  "version" : 1,
+  "members" : [
+		{
+			"_id" : 0,
+			"host" : "mongo1:27017"
+		},
+		{
+			"_id" : 1,
+			"host" : "mongo2:27017"
+		}
+	]
+}
+rs.initiate(config)
+use saildb
+
