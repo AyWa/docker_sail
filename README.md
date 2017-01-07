@@ -1,4 +1,7 @@
 #docker_sail
+##Warning:
+A la premiere install:   
+Ne pas lancer neo4j_document_manager sans set un mdp au neo4j (en allant sur l'interface web)   
 ##Mongo_container
 `cd mongodb_container`   
 command:  
