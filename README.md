@@ -1,8 +1,11 @@
 #docker_sail
 ##Warning:
 A la premiere install:   
-Ne pas lancer neo4j_document_manager sans set un mdp au neo4j (en allant sur l'interface web)   
-##Mongo_container
+Ne pas lancer neo4j_document_manager sans set un mdp au neo4j (en allant sur l'interface web)  
+##Mongo_SWARM_duplicate (for neo4j manager etc)
+https://github.com/AyWa/docker_sail/blob/master/swarm_mongodb_container/install_swarm   
+il faut utiliser la deuxieme version pour être securiser:   
+##Mongo_container (useless )
 `cd mongodb_container`   
 command:  
 `docker build . -t mongodb_sail`   
