@@ -1,7 +1,11 @@
 #docker_sail
-##help
+##helper
 Docker: remove all Exited containers
 `sudo docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs sudo docker rm`   
+Delete all containers   
+`docker rm $(docker ps -a -q)`   
+Delete all images   
+`docker rmi $(docker images -q)`   
 ##Warning:
 A la premiere install:   
 Ne pas lancer neo4j_document_manager sans set un mdp au neo4j (en allant sur l'interface web)  
