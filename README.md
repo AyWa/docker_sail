@@ -22,5 +22,7 @@ command:
 you can access to  http://localhost:7474/ or http://198.211.118.218:7474/browser/   
 ##neo4j_doc_manager
 `cd neo4j_doc_manager`   
+il faut peut etre changer le script sh en mettant les bonnes addresses et bon mdp des bdd/neo4j   
 command:  
-``
+`docker build . -t neo4j_doc_manager`   
+`docker run neo4j_doc_manager`
