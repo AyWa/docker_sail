@@ -70,16 +70,5 @@ config = {
 rs.initiate(config)
 use saildb
 
-quick way with the config   
-mkdir main   
-mkdir second   
-sudo cp save_mongodb-keyfile main/mongodb-keyfile   
-sudo chmod 600 main/mongodb-keyfile   
-sudo chown 999 main/mongodb-keyfile   
-sudo cp save_mongodb-keyfile second/mongodb-keyfile   
-sudo chmod 600 second/mongodb-keyfile   
-sudo chown 999 second/mongodb-keyfile   
-docker run --name mongo1 -v /home/cibot/docker_config/swarm_mongodb_container/main/mongo-files/data:/data/db -v /home/cibot/docker_config/swarm_mongodb_container/main:/opt/keyfile --net sail-mongo-cluster -p 30001:27017 -d mongo --keyFile /opt/keyfile/mongodb-keyfile --replSet sail-mongo-set   
-docker run --name mongo2 -v /home/cibot/docker_config/swarm_mongodb_container/second/mongo-files/data:/data/db -v /home/cibot/docker_config/swarm_mongodb_container/second:/opt/keyfile --net sail-mongo-cluster -p 30002:27017 -d mongo --keyFile /opt/keyfile/mongodb-keyfile --replSet sail-mongo-set   
 
 
