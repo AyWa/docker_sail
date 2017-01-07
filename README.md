@@ -1,10 +1,13 @@
 #docker_sail
+##help
+Docker: remove all Exited containers
+`sudo docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs sudo docker rm`   
 ##Warning:
 A la premiere install:   
 Ne pas lancer neo4j_document_manager sans set un mdp au neo4j (en allant sur l'interface web)  
 CREER LES NETWORK CLUSTER:   
-`docker network create sail-mongo-cluster`    
-`docker network create neo4j-cluster`
+`docker network create --driver=bridge --subnet=172.28.0.0/16 --gateway=172.28.0.1 sail-mongo-cluster`    
+`docker network create --driver=bridge --subnet=172.27.0.0/16 --gateway=172.27.0.1  neo4j-cluster`
 ##Mongo_SWARM_duplicate (for neo4j manager etc)
 https://github.com/AyWa/docker_sail/blob/master/swarm_mongodb_container/install_swarm   
 il faut utiliser la deuxieme version pour être securiser:   
