@@ -1,6 +1,6 @@
 #docker_sail
 ##helper
-Docker: remove all Exited containers
+Docker: remove all Exited containers   
 `sudo docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs sudo docker rm`   
 Delete all containers   
 `docker rm $(docker ps -a -q)`   
