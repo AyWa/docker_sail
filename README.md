@@ -2,6 +2,9 @@
 ##Warning:
 A la premiere install:   
 Ne pas lancer neo4j_document_manager sans set un mdp au neo4j (en allant sur l'interface web)  
+CREER LES NETWORK CLUSTER:   
+`docker network create sail-mongo-cluster`    
+`docker network create neo4j-cluster`
 ##Mongo_SWARM_duplicate (for neo4j manager etc)
 https://github.com/AyWa/docker_sail/blob/master/swarm_mongodb_container/install_swarm   
 il faut utiliser la deuxieme version pour être securiser:   
@@ -28,4 +31,5 @@ you can access to  http://localhost:7474/ or http://198.211.118.218:7474/browser
 il faut peut etre changer le script sh en mettant les bonnes addresses et bon mdp des bdd/neo4j   
 command:  (il faudra rajouter le network docker mongo et neo4j) 
 `docker build . -t neo4j_doc_manager`   
-`docker run neo4j_doc_manager`
+`docker run neo4j_doc_manager`    
+`docker run --net sail-mongo-cluster --net neo4j-cluster neo4j_doc_manager`
