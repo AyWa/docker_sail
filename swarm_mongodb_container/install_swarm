@@ -70,3 +70,6 @@ config = {
 rs.initiate(config)
 use saildb
 
+Si on a deja les dossier /data
+docker run --name mongo1 --restart=always -v /home/cibot/docker_config/swarm_mongodb_container/main/mongo-files/data:/data/db -v /home/cibot/docker_config/swarm_mongodb_container/main:/opt/keyfile --net sail-mongo-cluster -p 30001:27017 -d mongo --keyFile /opt/keyfile/mongodb-keyfile --replSet sail-mongo-set
+docker run --name mongo2 --restart=always -v /home/cibot/docker_config/swarm_mongodb_container/second/mongo-files/data:/data/db -v /home/cibot/docker_config/swarm_mongodb_container/second:/opt/keyfile --net sail-mongo-cluster -p 30002:27017 -d mongo --keyFile /opt/keyfile/mongodb-keyfile --replSet sail-mongo-set
