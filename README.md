@@ -36,7 +36,5 @@ you can access to  http://localhost:7474/ or http://198.211.118.218:7474/browser
 ##neo4j_doc_manager
 `cd neo4j_doc_manager`   
 il faut peut etre changer le script sh en mettant les bonnes addresses et bon mdp des bdd/neo4j   
-command:  (il faudra rajouter le network docker mongo et neo4j) 
-`docker build . -t neo4j_doc_manager`   
-`docker run neo4j_doc_manager`    
-`docker run --restart=always --net sail-mongo-cluster --net neo4j-cluster neo4j_doc_manager`
+`docker build . -t neo4j_doc_manager`     
+`docker run --name neo4_docmanag --restart=always --net sail-mongo-cluster --net neo4j-cluster neo4j_doc_manager`
