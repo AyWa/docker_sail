@@ -31,7 +31,7 @@ le mettre a jour pour le systemd
 `cd neo4j`   
 command:  
 `docker build . -t neo4j`   
-`docker run --restart=always --publish=7474:7474 --publish=7687:7687 --net neo4j-cluster --volume=/home/cibot/docker_config/neo4j/data:/data neo4j`   
+`docker run -d --restart=always --publish=7474:7474 --publish=7687:7687 --net neo4j-cluster --volume=/home/cibot/docker_config/neo4j/data:/data neo4j`   
 you can access to  http://localhost:7474/ or http://198.211.118.218:7474/browser/   
 ##neo4j_doc_manager
 `cd neo4j_doc_manager`   
