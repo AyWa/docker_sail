@@ -35,7 +35,10 @@ il faut peut etre changer le script sh en mettant les bonnes addresses et bon md
 il faut mettre la clef ssh dans /docker_config/sail_app/.ssh/id_rsa (la demander à marc ou se faire une clef rsa github).   
 la premiere install il faut faire la demande de validation de clef pour obtenir le file know_hosts:   
 `GIT_SSH_COMMAND='ssh -i /root/.ssh/id_rsa' git clone git@github.com:Ciboulette/SAIL.git`   
-normal install :
+normal install :   
  `docker build . -t sail_app`   
 `docker run -d --name sail_app --restart=always --publish=4200:4200 --volume=/home/cibot/docker_config/sail_app/.ssh:/root/.ssh/ --net sail-mongo-cluster sail_app`   
 `docker network connect neo4j-cluster sail_app`   
+to update (it takes ~5 min):   
+`docker stop sail_app`   
+`docker start sail_app`   
